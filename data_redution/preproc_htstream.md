@@ -556,7 +556,7 @@ Note the patterns:
 **6\.** We can now run the preprocessing routine across all samples on the real data using a SLURM script, [hts_preproc.slurm](../scripts/hts_preproc.slurm), that we should take a look at now.
 
     cd /share/workshop/$USER/rnaseq_example  # We'll run this from the main directory
-    wget https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-single-cell-RNA-sequencing-Workshop-UCD_UCSF/master/scripts/hts_preproc.slurm
+    wget https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Alliance-for-Global-Health-and-Science-Makerere-University_Variants/master/scripts/hts_preproc.slurm
     less hts_preproc.slurm
 
  When you are done, type "q" to exit.
@@ -689,7 +689,7 @@ Lets grep for the sequence and count occurrences
 I've created a small R script to read in each json file, pull out some relevant stats and write out a table for all samples.
 
     cd /share/workshop/$USER/rnaseq_example  # We'll run this from the main directory
-    wget https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-single-cell-RNA-sequencing-Workshop-UCD_UCSF/master/scripts/summarize_stats.R
+    wget https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Alliance-for-Global-Health-and-Science-Makerere-University_Variants/master/scripts/summarize_stats.R
 
     R CMD BATCH summarize_stats.R
     cat summary_hts.txt
