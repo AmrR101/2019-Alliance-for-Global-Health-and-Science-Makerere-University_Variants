@@ -9,10 +9,6 @@ title: July 2019 Variant Analysis Workshop (Makerere University, Kampala, Uganda
 [What is Bioinformatics](pdfs/Genomics_a_perspective_March2019.pdf)
 
 
-## Data Reduction
-* [Project Setup](data_reduction/project_setup.md)
-
-
 ## Introductory Command line and cluster
 * [Intro to command-line](cli/command-line-intro.md)
 
@@ -26,7 +22,13 @@ title: July 2019 Variant Analysis Workshop (Makerere University, Kampala, Uganda
 
 
 ## Data Reduction
+* [Files and Filetypes for RNA-Seq](data_reduction/filetypes.md)
 * [Project Setup](data_reduction/project_setup.md)
+* [Preprocessing Data](data_reduction/preproc_htstream.md)
+* [Aligners](data_reduction/alignment.md)
+* [Generating Summarized Counts](data_reduction/counts.md)
+* [Project Setup](data_reduction/project_setup.md)
+
 
 ## Variant Calling
 
