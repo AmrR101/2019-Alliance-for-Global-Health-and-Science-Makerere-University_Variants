@@ -6,6 +6,10 @@
 2. [RStudio](https://www.rstudio.com/products/rstudio/download/#download)  
   Install from the website
 
+2b. R packages
+  * tidyr,  install.packages("tidyr", repos='http://cran.us.r-project.org')
+  * json,  install.packages("json", repos='http://cran.us.r-project.org')
+
 3. [Anaconda3](https://www.anaconda.com/distribution/#download-section)  
   Install from website
 
