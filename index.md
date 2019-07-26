@@ -22,9 +22,9 @@ title: July 2019 Variant Analysis Workshop (Makerere University, Kampala, Uganda
 
 ## Data Reduction
 <!--
-* [Files and Filetypes for RNA-Seq](data_reduction/filetypes.md)
+* [Files and Filetypes](data_reduction/filetypes.md)
 * [Project Setup](data_reduction/project_setup.md)
-* [Preprocessing Data](data_reduction/preproc_htstream.md)
+* [Preprocessing Data](data_reduction/preproc_htstream_DNA.md)
 * [Aligners](data_reduction/alignment.md)
 * [Generating Summarized Counts](data_reduction/counts.md)
 * [Project Setup](data_reduction/project_setup.md)

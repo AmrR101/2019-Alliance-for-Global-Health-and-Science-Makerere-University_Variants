@@ -242,9 +242,9 @@ As file sizes get large, you'll often see compressed files, or whole compressed 
     gzip test.txt
     cat test.txt.gz
 
-Should now be binary, 'zcat' can be used to uncompress and cat
+Should now be binary, 'gunzip -c' can be used to uncompress and cat
 
-    zcat test.txt.gz
+    gunzip -c test.txt.gz
 
 To uncompress a file
 

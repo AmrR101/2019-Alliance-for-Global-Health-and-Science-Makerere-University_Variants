@@ -4,14 +4,14 @@ This document assumes [preproc htstream](./preproc_htstream.md) has been complet
 
 **IF** for some reason it didn't finish, is corrupted or you missed the session, you can copy over a completed copy
 
-    cp -r /share/biocore/workshops/2019_March_RNAseq/02-STAR_alignment /share/workshop/$USER/rnaseq_example/.
-    cp  /share/biocore/workshops/2019_March_RNAseq/summary_alignments.txt /share/workshop/$USER/rnaseq_example/.
+    cp -r /share/biocore/workshops/2019_March_RNAseq/02-STAR_alignment ~/variant_example/.
+    cp  /share/biocore/workshops/2019_March_RNAseq/summary_alignments.txt ~/variant_example/.
 
 In this section, we will collate all of the count data into one file for analysis in R.
 
 **1\.** First lets make sure we are where we are supposed to be.
 
-    cd /share/workshop/$USER/rnaseq_example
+    cd ~/variant_example
 
 ---
 **2\.** First, go back to your 02-STAR_alignment directory. Let's use a wildcard to list all of the counts files from all of the STAR alignment directories:
@@ -20,10 +20,10 @@ In this section, we will collate all of the count data into one file for analysi
 
 Take a look at the beginning of one of these files:
 
-    head 02-STAR_alignment/SampleAC1/SampleAC1_ReadsPerGene.out.tab
+    head 02-STAR_alignment/sample1/sample1_ReadsPerGene.out.tab
 
 ```
-msettles@tadpole:/share/workshop/msettles/rnaseq_example$     head 02-STAR_alignment/SampleAC1/SampleAC1_ReadsPerGene.out.tab
+msettles@tadpole:/share/workshop/msettles/rnaseq_example$     head 02-STAR_alignment/sample1/sample1_ReadsPerGene.out.tab
 N_unmapped	95519	95519	95519
 N_multimapping	213548	213548	213548
 N_noFeature	641702	2690321	682539
@@ -41,13 +41,13 @@ The columns are ID, reads map to either strand, reads mapped to forward strand, 
 ---
 **3\.** So let's take one file and figure out how to do that, then we will expand it to all the files. First let's just get the rows we want, i.e. everything but the first four:
 
-    tail -n +5 02-STAR_alignment/SampleAC1/SampleAC1_ReadsPerGene.out.tab | head
+    tail -n +5 02-STAR_alignment/sample1/sample1_ReadsPerGene.out.tab | head
 
 When you give the '-n' option for the 'tail' command a number preceded by a '+' sign, it gives you the entire file starting at the line indicated by the number. In this case, we want to skip the first 4 lines, so we start at line 5. We're piping the command to 'head' just to check that it looks correct. You shouldn't see the first four total lines.
 
 Now, we want only the fourth column (the counts), and in order to get that we pipe the output of the tail command to the 'cut' command, and then redirect the output to a new file:
 
-    tail -n +5 02-STAR_alignment/SampleAC1/SampleAC1_ReadsPerGene.out.tab | cut -f4 | head
+    tail -n +5 02-STAR_alignment/sample1/sample1_ReadsPerGene.out.tab | cut -f4 | head
 
 Now, C61_ReadsPerGene.out.tab.count contains a single column of data... counts for each of the genes for that sample.
 
@@ -59,7 +59,7 @@ Now, C61_ReadsPerGene.out.tab.count contains a single column of data... counts f
 
 This command takes all the files that we listed in step 1 and loops through them, one by one, and for every iteration, assigns the filename to the '${sample}' variable. Also, for every iteration, it runs whatever commands are between the 'do' and 'done'.... and every iteration the value of '${sample}' changes. The semi-colons separate the parts of the loop. The 'echo' command just prints the value of $x to the screen... in this case just the filename. However, instead, we will use our previously created command, but with ${sample} instead of the filename, and adding a few things:
 
-    cd /share/workshop/$USER/rnaseq_example
+    cd ~/variant_example
     mkdir 03-Counts
     mkdir 03-Counts/tmp
     for sample in `cat samples.txt`; do \
@@ -72,7 +72,7 @@ After this command, there should be a counts file for every sample, in 03-Counts
 ---
 **4\.** Next, we need to get the columns for the final table. Because all of these files are sorted in the exact same order (by gene ID), we can just use the columns from any of the files:
 
-    tail -n +5 02-STAR_alignment/SampleAC1/SampleAC1_ReadsPerGene.out.tab | cut -f1 > 03-Counts/tmp/geneids.txt
+    tail -n +5 02-STAR_alignment/sample1/sample1_ReadsPerGene.out.tab | cut -f1 > 03-Counts/tmp/geneids.txt
     head 03-Counts/tmp/geneids.txt
 
 Finally, we want to combine all of these columns together using the 'paste' command, and put it in a temporary file:
@@ -90,7 +90,7 @@ We take the samples.txt file and pipe that to the sort (to ensure they are in th
 
 ```
 msettles@tadpole:/share/workshop/msettles/rnaseq_example$ head 03-Counts/rnaseq_workshop_counts.txt
-SampleAC1	SampleAC2	SampleAC3	SampleAC4	SampleAD1	SampleAD2	SampleAD3	SampleAD4	SampleBC1	SampleBC2	SampleBC3	SampleBC4	SampleBD1	SampleBD2	SampleBD3	SampleBD4
+sample1	SampleAC2	SampleAC3	SampleAC4	SampleAD1	SampleAD2	SampleAD3	SampleAD4	SampleBC1	SampleBC2	SampleBC3	SampleBC4	SampleBD1	SampleBD2	SampleBD3	SampleBD4
 ENSG00000223972.5	3	1	0	0	0	0	0	0	2	0	0	0	0	5	0	0
 ENSG00000227232.5	20	7	15	10	7	9	15	26	6	10	6	6	14	10	4	4
 ENSG00000278267.1	1	2	1	1	0	1	2	4	0	0	0	0	0	0	1	0

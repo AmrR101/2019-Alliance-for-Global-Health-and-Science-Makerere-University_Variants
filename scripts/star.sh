@@ -19,7 +19,7 @@ do
        --runThreadN 8 \
        --genomeDir $REF \
        --outSAMtype BAM SortedByCoordinate \
-       --readFilesCommand zcat \
+       --readFilesCommand gunzip -c \
        --readFilesIn 01-HTS_Preproc/${sample}/${sample}_R1.fastq.gz 01-HTS_Preproc/${sample}/${sample}_R2.fastq.gz \
        --quantMode GeneCounts \
        --outFileNamePrefix ${outpath}/${sample}/${sample}_ \

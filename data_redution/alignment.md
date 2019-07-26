@@ -4,9 +4,9 @@ This document assumes [preproc htstream](./preproc_htstream.md) has been complet
 
 **IF** for some reason it didn't finish, is corrupted or you missed the session, you can copy over a completed copy
 
-    cp -r /share/biocore/workshops/2019_March_RNAseq/HTS_testing /share/workshop/$USER/rnaseq_example/.
-    cp -r /share/biocore/workshops/2019_March_RNAseq/01-HTS_Preproc /share/workshop/$USER/rnaseq_example/.
-    cp  /share/biocore/workshops/2019_March_RNAseq/summary_hts.txt /share/workshop/$USER/rnaseq_example/.
+    cp -r /share/biocore/workshops/2019_March_RNAseq/HTS_testing ~/variant_example/.
+    cp -r /share/biocore/workshops/2019_March_RNAseq/01-HTS_Preproc ~/variant_example/.
+    cp  /share/biocore/workshops/2019_March_RNAseq/summary_hts.txt ~/variant_example/.
 
 ## Alignment vs Assembly
 
@@ -131,7 +131,7 @@ applications (like RNA-Seq ... would “cancel” out anyway).
 
 **1\.** First lets make sure we are where we are supposed to be and that the References directory is available.
 
-    cd /share/workshop/$USER/rnaseq_example
+    cd ~/variant_example
 
 ---
 **2\.** To align our data we will need the genome (fasta) and annotation (gtf) for human. There are many places to find them, but we are going to get them from the [GENCODE](https://www.gencodegenes.org/human/).
@@ -162,8 +162,8 @@ We need to first get the url for the genome fasta.
  #SBATCH --partition=production
  #SBATCH --reservation=workshop
  #SBATCH --account=workshop
- #SBATCH --output=slurmout/star-index_%A.out # File to which STDOUT will be written
- #SBATCH --error=slurmout/star-index_%A.err # File to which STDERR will be written
+ #SBATCH --output=scriptout/star-index_%A.out # File to which STDOUT will be written
+ #SBATCH --error=scriptout/star-index_%A.err # File to which STDERR will be written
 
  start=`date +%s`
  echo $HOSTNAME
@@ -213,13 +213,13 @@ This step will take a couple hours. You can look at the [STAR documentation](htt
 
 **IF** for some reason it didn't finish, is corrupted, or you missed the session, you can copy over a completed copy.
 
-    cp -r /share/biocore/workshops/2019_March_RNAseq/References/star.overlap100.gencode.v29 /share/workshop/$USER/rnaseq_example/References/.
+    cp -r /share/biocore/workshops/2019_March_RNAseq/References/star.overlap100.gencode.v29 ~/variant_example/References/.
 
 ## Alignments
 
 **1\.** We are now ready to try an alignment. Let's create an output directory for STAR:
 
-    cd /share/workshop/$USER/rnaseq_example/HTS_testing
+    cd ~/variant_example/HTS_testing
 
 and let's run STAR (via srun) on the pair of streamed test files we created earlier. **The command is on multiple lines for readability**:
 
@@ -244,11 +244,11 @@ Then run the star commands
     --genomeDir ../References/star.overlap100.gencode.v29 \
     --outSAMtype BAM SortedByCoordinate \
     --quantMode GeneCounts \
-    --outFileNamePrefix SampleAC1.streamed_ \
-    --readFilesCommand zcat \
-    --readFilesIn SampleAC1.streamed_R1.fastq.gz SampleAC1.streamed_R2.fastq.gz
+    --outFileNamePrefix sample1.streamed_ \
+    --readFilesCommand gunzip -c \
+    --readFilesIn sample1.streamed_R1.fastq.gz sample1.streamed_R2.fastq.gz
 
-In the command, we are telling star to count reads on a gene level ('--quantMode GeneCounts'), the prefix for all the output files will be SampleAC1.streamed_, the command to unzip the files (zcat), and finally, the input file pair.
+In the command, we are telling star to count reads on a gene level ('--quantMode GeneCounts'), the prefix for all the output files will be sample1.streamed_, the command to unzip the files (gunzip -c), and finally, the input file pair.
 
 Once finished please 'exit' the srun session. You'll know you were successful when your back on tadpole
 
@@ -268,21 +268,21 @@ Once finished please 'exit' the srun session. You'll know you were successful wh
 
 We need to index the BAM file:
 
-    cd /share/workshop/$USER/rnaseq_example/HTS_testing
-    samtools index SampleAC1.streamed_Aligned.sortedByCoord.out.bam
+    cd ~/variant_example/HTS_testing
+    samtools index sample1.streamed_Aligned.sortedByCoord.out.bam
 
 **IF** for some reason it didn't finish, is corrupted or you missed the session, you can copy over a completed copy
 
-    cp -r /share/biocore/workshops/2019_March_RNAseq/HTS_testing/SampleAC1.streamed_Aligned.sortedByCoord.out.bam* /share/workshop/$USER/rnaseq_example/HTS_testing
+    cp -r /share/biocore/workshops/2019_March_RNAseq/HTS_testing/sample1.streamed_Aligned.sortedByCoord.out.bam* ~/variant_example/HTS_testing
 
 ---
-**2\.** Transfer SampleAC1.streamed_Aligned.sortedByCoord.out.bam and SampleAC1.streamed_Aligned.sortedByCoord.out.bam (the index file) to your computer using scp or winSCP, or copy/paste from cat [sometimes doesn't work].
+**2\.** Transfer sample1.streamed_Aligned.sortedByCoord.out.bam and sample1.streamed_Aligned.sortedByCoord.out.bam (the index file) to your computer using scp or winSCP, or copy/paste from cat [sometimes doesn't work].
 
 In a new shell session on my laptop. **NOT logged into tadpole**.
 
     mkdir ~/rnaseq_workshop
     cd ~/rnaseq_workshop
-    scp msettles@tadpole.genomecenter.ucdavis.edu:/share/workshop/msettles/rnaseq_example/HTS_testing/SampleAC1.streamed_Aligned.sortedByCoord.out.bam* .
+    scp msettles@tadpole.genomecenter.ucdavis.edu:/share/workshop/msettles/rnaseq_example/HTS_testing/sample1.streamed_Aligned.sortedByCoord.out.bam* .
 
 Its ok of the mkdir command fails ("File exists") because we aleady created the directory earlier.
 
@@ -354,7 +354,7 @@ Reset the window by searching for HBB again. And zoom in 1 step.
 
 **1\.** We can now run STAR across all samples on the real data using a SLURM script, [star.slurm](../scripts/star.slurm), that we should take a look at now.
 
-    cd /share/workshop/$USER/rnaseq_example  # We'll run this from the main directory
+    cd ~/variant_example  # We'll run this from the main directory
     wget https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Alliance-for-Global-Health-and-Science-Makerere-University_Variants/master/scripts/star.slurm
     less star.slurm
 
@@ -372,8 +372,8 @@ Reset the window by searching for HBB again. And zoom in 1 step.
 #SBATCH --reservation=workshop
 #SBATCH --account=workshop
 #SBATCH --array=1-16
-#SBATCH --output=slurmout/star_%A_%a.out # File to which STDOUT will be written
-#SBATCH --error=slurmout/star_%A_%a.err # File to which STDERR will be written
+#SBATCH --output=scriptout/star_%A_%a.out # File to which STDOUT will be written
+#SBATCH --error=scriptout/star_%A_%a.err # File to which STDERR will be written
 
 start=`date +%s`
 echo $HOSTNAME
@@ -394,7 +394,7 @@ call="STAR
   --runThreadN 8 \
   --genomeDir $REF \
   --outSAMtype BAM SortedByCoordinate \
-  --readFilesCommand zcat \
+  --readFilesCommand gunzip -c \
   --readFilesIn 01-HTS_Preproc/${sample}/${sample}_R1.fastq.gz 01-HTS_Preproc/${sample}/${sample}_R2.fastq.gz \
   --quantMode GeneCounts \
   --outFileNamePrefix ${outpath}/${sample}/${sample}_ \
@@ -420,7 +420,7 @@ We can watch the progress of our task array using the 'squeue' command. Takes ab
 
 **1\.** Once your jobs have finished successfully (check the error and out logs like we did in the previous exercise), use a script of ours, [star_stats.sh](../scripts/star_stats.sh) to collect the alignment stats. Don't worry about the script's contents at the moment; you'll use very similar commands to create a counts table in the next section. For now:
 
-    cd /share/workshop/$USER/rnaseq_example  # We'll run this from the main directory
+    cd ~/variant_example  # We'll run this from the main directory
     wget https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Alliance-for-Global-Health-and-Science-Makerere-University_Variants/master/scripts/star_stats.sh
     bash star_stats.sh
 

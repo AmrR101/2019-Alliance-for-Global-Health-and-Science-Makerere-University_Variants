@@ -6,7 +6,7 @@ The primary file types you'll see related to DNA sequence analysis are:
 * fastq
 * gtf/gff
 * sam/bam/cram
-* bed
+* vcf
 
 ## Sequence based file types
 Sequence based files first started out as fasta with paired qual files (Sanger and 454), with Illumina and quality scores being used more, the fastq file became the default output from DNA sequencers. These days additional file types are being used, including fast5 by Oxford Nanopore and 'unmapped' bam files by Pacific Biosciences.
@@ -205,3 +205,18 @@ The sequence that was aligned. If hard clipping occurred, only the aligned porti
 
 **QUAL: segment quality scores**  
 The quality scores of the sequence that was aligned. If hard clipping occurred, only the aligned portion is represented, if soft clipping occurred, the original sequence is present.
+
+## Variant descriptive file Types
+
+### Variant Call Format (VCF)
+
+
+VCF (variant call format) is the standard format for variant reporting. TODO: LINK TO VCF Specifications page.  
+
+<img src="filetypes_figures/filetypes_figure11.png" alt="figure6" width="600px"/>
+
+There are 9 required columns followed by a column for each sample. Samples are defined by their RG tag added during the mapping process.
+
+TODO: ADD in Variant Call Column descriptors taken from the specs page.
+
+### Variant effect Prediction (ANN) field
