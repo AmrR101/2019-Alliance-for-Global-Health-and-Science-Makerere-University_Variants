@@ -64,15 +64,27 @@ The GFF (General Feature Format) format consists of one line per feature, each c
 Fields must be tab-separated and all fields must contain a value; “empty” fields should be denoted with a ‘.’.
 
 Columns:
-* Seqname: Name of the sequence chromosome
+**Seqname: Name of the sequence chromosome**
 Source: the program, or database, that generated the feature
-* Feature: feature type name, (e.g. gene, exon, cds, etc.)
-* Start: start position of the feature, sequences begin at 1
-* End: stop position of the feature, sequences begin at 1
-* Score: a floating point value (e.g. 0.01)
-Strand: Defined as ‘+’ (forward),or ‘-’ (reverse)
-* Frame: One of ‘0’, ‘1’, ‘2’, ‘0’ represents the first base of a codon.
-* Attribute: A semicolon-separated list of tag-value pairs, providing additional information about each feature.
+
+**Feature: feature type name**
+examples include gene, exon, cds, etc.
+
+**Start: start position of the feature**
+sequences begin at 1
+
+**End: stop position of the featur**
+Sequences begin at 1
+
+**Score: a floating point value (e.g. 0.01)**
+
+**Strand: Defined as ‘+’ (forward),or ‘-’ (reverse)**
+
+**Frame: One of ‘0’, ‘1’, ‘2’, ‘0’**
+Represents the first base of a codon.
+
+**Attribute: A semicolon-separated list of tag-value pairs**
+Providing additional information about each feature.
 
 <img src="filetypes_figures/filetypes_figure6.png" alt="figure6" width="600px"/>
 
@@ -211,12 +223,124 @@ The quality scores of the sequence that was aligned. If hard clipping occurred, 
 ### Variant Call Format (VCF)
 
 
-VCF (variant call format) is the standard format for variant reporting. TODO: LINK TO VCF Specifications page.  
+VCF (variant call format) is the standard format for variant reporting, is a text file format (possibly likely stored in a compressed manner, BCF). For an up to date scription of the specifications see [VCF specifications](http://samtools.github.io/hts-specs/).
 
 <img src="filetypes_figures/filetypes_figure11.png" alt="figure6" width="600px"/>
 
-There are 9 required columns followed by a column for each sample. Samples are defined by their RG tag added during the mapping process.
+It contains meta-information lines (prefixed with “##”), a header line
+(prefixed with “#”), and data lines each containing information about a
+position in the genome and genotype information on samples for each position
+(text fields separated by tabs). There are 8 fixed columns followed by a
+column for each sample. Samples are defined by their RG tag added during the
+mapping process. Zero length fields ar enot allowed, a dot (“.”) must be used
+instead.
 
-TODO: ADD in Variant Call Column descriptors taken from the specs page.
+#### Meta-information Lines
+
+File meta-information is included after the __##__ string and must be key=value
+pairs. Meta-information lines are optional, and require an ID which must be unique within their type. For all of the structured lines (##INFO, ##FORMAT, ##FILTER, etc.), extra fields can be included after the default fields. For example:
+
+  ##INFO=<ID=ID,Number=number,Type=type,Description="description",Source="description",Version="128">
+
+### Data Lines (Columns 1 to 8)
+
+**CHROM — chromosome**
+An identifier from the reference genome or an angle-bracketed ID String
+(“<ID>”) pointing to a contig in the assembly file.
+
+**POS — position**
+The reference position, with the 1st base having position 1.
+
+**ID — identifier**
+Semi-colon separated list of unique identifiers where available. If this is a
+dbSNP variant the rs number(s) should be used. If there is no identifier
+available, then the MISSING value should be used.
+
+**REF — reference base(s)**
+Each base must be one of A,C,G,T,N (case insensitive). Multiple bases are
+permitted. The value in the POS field refers to the position of the first base
+in the String. For simple insertions and deletions in which either the REF or
+one of the ALT alleles would otherwise be null/empty.
+
+**ALT — alternate base(s)**
+Comma separated list of alternate non-reference alleles. These alleles do not
+have to be called in any of the samples.
+
+**QUAL — quality**
+Phred-scaled quality score for the assertion made in ALT. i.e. −10log10
+prob(call in ALT is wrong). If ALT is ‘.’ (no variant) then this is −10log10
+prob(variant), and if ALT is not ‘.’ this is −10log10 prob(no variant). If
+unknown, the MISSING value must be specified.
+
+**FILTER — filter status**
+PASS if this position has passed all filters, i.e. a call is made at this position. Otherwise, if the site has not passed all filters, a semicolon-separated list of codes for filters that fail. e.g. “q10;s50” might indicate that at this site the quality is below 10 and the number of samples with data is below 50% of the total number of samples. ‘0’ is reserved and must not be used as a filter String. If filters have not been applied, then this field must be set to the MISSING value.
+
+**INFO — additional information**
+INFO fields are encoded as a semicolon-separated series of short keys with
+optional values in the format: key[=data[,data]]. The exact format of each INFO
+key should be specified in the meta-information. There are several common,
+reserved keywords that are standards across the community. See their detailed
+definitions below.
+
+* AA - Ancestral allele
+* AC - Allele count in genotypes, for each ALT allele, in the same order as listed
+* AD - Total read depth for each allele
+* ADF - Read depth for each allele on the forward strand
+* ADR - Read depth for each allele on the reverse strand
+* AF - Allele frequency for each ALT allele in the same order as listed
+(estimated from primary data, not called genotypes)
+* AN - Total number of alleles in called genotypes
+* BQ - RMS base quality
+* CIGAR - Cigar string describing how to align an alternate allele to the reference allele
+* DB - dbSNP membership
+* DP - Combined depth across samples
+* END - End position (for use with symbolic alleles)
+* H2 - HapMap2 membership
+* H3 - HapMap3 membership
+* MQ - RMS mapping quality
+* MQ0 - Number of MAPQ == 0 reads
+* NS - Number of samples with data
+* SB - Strand bias
+* SOMATIC - Somatic mutation (for cancer genomics)
+* VALIDATED - Validated by follow-up experiment
+* 1000G - 1000 Genomes membership
+
+##### INFO keys used for structural variants
+This key can be derived from the REF/ALT fields but is useful for filtering.
+
+* DEL - Deletion relative to the reference
+* INS - Insertion of novel sequence relative to the reference
+* DUP - Region of elevated copy number relative to the reference
+* INV - Inversion of reference sequence
+* CNV - Copy number variable region (may be both deletion and duplication)
+* BND - Breakend
+
+#### Genotype fields (Columns 9 and above)
+
+If genotype information is present, then the same types of data must be present
+for all samples. First a FORMAT field (Column 9) is given specifying the data
+types and order (colon-separated FORMAT keys from the meta-information
+section). This is followed by one data block per sample, with the colon-
+separated data corresponding to the types specified in the format. The first
+key must always be the genotype (GT) if it is present. If any of the fields is
+missing, it is replaced with the MISSING value. As with the INFO field, there
+are several common, reserved keywords that are standards across the community.
+See their detailed definitions below.
+
+* AD - Read depth for each allele
+* ADF - Read depth for each allele on the forward strand
+* ADR - Read depth for each allele on the reverse strand
+* DP - Read depth
+* EC - Expected alternate allele counts
+* FT - Filter indicating if this genotype was “called”
+* GL - Genotype likelihoods
+* GP - Genotype posterior probabilities
+* GQ - Conditional genotype quality
+* GT - Genotype
+* HQ - Haplotype quality
+* MQ - RMS mapping quality
+* PL - Phred-scaled genotype likelihoods rounded to the closest integer
+* PQ - Phasing quality
+* PS - Phase set
 
 ### Variant effect Prediction (ANN) field
