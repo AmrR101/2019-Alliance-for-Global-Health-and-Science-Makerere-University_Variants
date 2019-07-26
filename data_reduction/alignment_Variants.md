@@ -98,13 +98,14 @@ References directory.
 ---
 **2\.** To align our data we will need the genome (fasta) and annotation (gff) for Clostridium baratii str. Sullivan. There are many places to find them, but we are going to get them from the [NCBI](ftp://ftp.ncbi.nlm.nih.gov).
 
-We need to first get the url for the annotation gff.
-
-TODO: Add fig  
-
 Then the url for the genome fasta.
 
-TODO: Add fig
+<img src="alignment_figures/ncbi_genome.png" alt="NCBI Genome" width="600px"/>
+
+
+We need to first get the url for the annotation gff.
+
+<img src="alignment_figures/ncbi_gff.png" alt="NCBI GFF" width="600px"/>
 
 **3\.** We are going to use an aligner called ['BWA MEM'](https://github.com/lh3/bwa) to align the sequence reads, but first we need to index the genome for BWA. Lets pull down a shell script to index the genome.
 
@@ -174,84 +175,6 @@ Then run the bwa command (Its on multiple lines for readability)
 
 
 In the command, we are telling bwa to map reads to the genome using 2 threads, and providing a RG tag (see [filetype.md](./filetypes.md)), __piping__ to samtools sort (max mem 768M and threads 2), the name for the output file will be sample1.streamed_bwa.bam.
-
-##  Now let's take a look at an alignment in IGV. TODO: GET IGV
-
-**1\.** We first need to index the bam file, will use 'samtools' for this step, which is a program to manipulate SAM/BAM files. Take a look at the options for samtools and 'samtools index'.
-
-    samtools
-    samtools index
-
-We need to index the BAM file:
-
-    cd ~/variant_example/HTS_testing
-    samtools index sample1.streamed_bwa.bam
-
-**IF** for some reason it didn't finish, is corrupted or you missed the session, you can copy over from the flash drive
-
----
-**2\.** Now we are ready to use IGV. Go to the [IGV page at the Broad Institute](http://software.broadinstitute.org/software/igv/).
-
-<img src="alignment_figures/index_igv1.png" alt="index_igv1" width="600px"/>
-
-And then navigate to the download page, [IGV download](http://software.broadinstitute.org/software/igv/download)
-<img src="alignment_figures/index_igv2.png" alt="index_igv2" width="600px"/>
-
-Here you can download IGV for your respective platform (Window, Mac OSX, Linux), but we are going to use the web application they supply, [IGV web app](https://igv.org/app/).
-
-<img src="alignment_figures/index_igv3.png" alt="index_igv3" width="600px"/>
-
----
-**3\.** The first thing we want to do is load the Human genome. Click on "Genomes" in the menu and choose "Human (GRCh38/hg38)".
-
-<img src="alignment_figures/index_igv4.png" alt="index_igv4" width="600px"/>
-
----
-**4\.** Now let's load the alignment bam and index files. Click on "Tracks" and choose "Local File ...".
-
-<img src="alignment_figures/index_igv5.png" alt="index_igv5" width="600px"/>
-
-Navigate to where you transferred the bam and index file and select them both.
-
-<img src="alignment_figures/index_igv6.png" alt="index_igv6" width="600px"/>
-
-Now your alignment is loaded. Any loaded bam file aligned to a genome is called a "track".
-
-<img src="alignment_figures/index_igv7.png" alt="index_igv7" width="600px"/>
-
----
-**5\.** Lets take a look at the alignment associated with the gene __HBB__:
-
-<img src="alignment_figures/index_igv8.png" alt="index_igv8" width="600px"/>
-
-<img src="alignment_figures/index_igv9.png" alt="index_igv9" width="600px"/>
-
-You can zoom in by clicking on the plus sign (top right) or zoom out by clicking the negative sign. You also may have to move around by clicking and dragging in the BAM track window.
-
-You can also zoom in by clicking and dragging across the number line at the top. That section will highlight, and when you release the button, it will zoom into that section.
-
-<img src="alignment_figures/index_igv10.png" alt="index_igv10" width="600px"/>
-
-<img src="alignment_figures/index_igv11.png" alt="index_igv11" width="600px"/>
-
-Reset the window by searching for HBB again. And zoom in 1 step.
-
-<img src="alignment_figures/index_igv12.png" alt="index_igv12" width="600px"/>
-
----
-**6\.** See that the reads should be aligning within the exons in the gene. This makes sense, since RNA-Seq reads are from exons. Play with the settings on the right hand side a bit.
-
-<img src="alignment_figures/index_igv13.png" alt="index_igv13" width="600px"/>
-
-<img src="alignment_figures/index_igv14.png" alt="index_igv14" width="600px"/>
-
-<img src="alignment_figures/index_igv15.png" alt="index_igv15" width="600px"/>
-
-<img src="alignment_figures/index_igv16.png" alt="index_igv16" width="600px"/>
-
-<img src="alignment_figures/index_igv17.png" alt="index_igv17" width="600px"/>
-
----
 
 ## Running BWA on the experiment
 
