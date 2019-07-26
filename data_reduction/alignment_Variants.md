@@ -312,4 +312,4 @@ shell script for mapping using bash loop and bwa.
 
 shell script to produce summary mapping table
 
-[bwa_stats_wks_Variants.sh](../scripts/bwa_stats_wks_Variants.sh)
+[bwa_stats_wks_Variants.R](../scripts/bwa_stats_wks_Variants.R)
