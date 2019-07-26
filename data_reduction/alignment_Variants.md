@@ -1,4 +1,4 @@
-# Alignment to Read Counts & Visualization in IGV
+# Read mapping and alignment
 
 This document assumes [preproc htstream](./preproc_htstream_Variants.md) has been completed.
 
