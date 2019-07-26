@@ -1,3 +1,5 @@
+if (!any(rownames(installed.packages()) == "tidyr")) install.packages("tidyr", repos='http://cran.us.r-project.org')
+require(tidyr)
 
 samples <- readLines("samples.txt")
 map_dir <- "02-BWA"
@@ -9,13 +11,12 @@ bwa_stats <- lapply(samples, function(s) {
 
 if (length(bwa_stats) != length(samples)) stop("not all samples have samtools stats files")
 
-SN_data <- lapply(bwa_stats, function(data)){
+suppressWarnings(SN_data <- lapply(bwa_stats, function(data){
   sn <- grep("^SN",data, value=TRUE)
   sn <- separate(data.frame(sn),col=1, into=c("ID", "Name","Value"), sep="\t")[,-1]
-}
+}))
 
-cnames <- SN_data[[1]][,1]
-LongTable <- sapply(SN_data, "[[", 2L)
+LongTable <- t(sapply(SN_data, "[[", 2L))
 rownames(LongTable) <- samples
-colnames(LongTable) <- cnames
-write.table(round(LongTable,2),"bwa_stats.txt",sep="\t",row.names=T,col.names=T,quote=F)
+colnames(LongTable) <- sub(":","",SN_data[[1]][,1])
+write.table(LongTable,"bwa_stats.txt",sep="\t",row.names=T,col.names=T,quote=F)
