@@ -21,16 +21,13 @@ title: July 2019 Variant Analysis Workshop (Makerere University, Kampala, Uganda
 * [Data in R](intro2R/orig_data_in_R.md)
 
 ## Data Reduction
-<!--
 * [Files and Filetypes](data_reduction/filetypes.md)
 * [Project Setup](data_reduction/project_setup.md)
-* [Preprocessing Data](data_reduction/preproc_htstream_DNA.md)
-* [Aligners](data_reduction/alignment.md)
-* [Generating Summarized Counts](data_reduction/counts.md)
-* [Project Setup](data_reduction/project_setup.md)
--->
+* [Preprocessing Data](data_reduction/preproc_htstream_Variants.md)
+* [Alignment](data_reduction/alignment_Variants.md)
 
 ## Variant Calling
+
 
 ## Analysis
 

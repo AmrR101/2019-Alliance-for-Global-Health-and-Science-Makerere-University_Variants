@@ -2,7 +2,7 @@
 
 **The forest through the trees.**
 
-<img src="data_reduction/figures/flowchart2.png" alt="flowchart2" width="600px"/>
+<img src="base_figures/wkflow_0.png" alt="workflow flowchart" width="600px"/>
 
 ## Be Consistent
 

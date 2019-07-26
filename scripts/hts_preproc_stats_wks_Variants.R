@@ -133,4 +133,4 @@ LongTable <- data.frame(
 )
 
 rownames(LongTable) <- samples
-write.table(round(LongTable,2),"summary_hts.txt",sep="\t",row.names=T,col.names=T,quote=F)
+write.table(round(LongTable,2),"hts_preproc_stats.txt",sep="\t",row.names=T,col.names=T,quote=F)

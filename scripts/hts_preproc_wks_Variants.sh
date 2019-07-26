@@ -20,7 +20,7 @@ do
         hts_QWindowTrim -n -A -L ${outpath}/${sample}/${sample}_htsStats.log | \
         hts_NTrimmer -n -A -L ${outpath}/${sample}/${sample}_htsStats.log | \
         hts_CutTrim -n -m 150 -A -L ${outpath}/${sample}/${sample}_htsStats.log | \
-        hts_Stats -F -A -L ${outpath}/${sample}/${sample}_htsStats.log -f ${outpath}/${sample}/${sample}" > scriptout/htstream.out 2> scriptout/htstream.err
+        hts_Stats -F -A -L ${outpath}/${sample}/${sample}_htsStats.log -f ${outpath}/${sample}/${sample}"
   echo $call
   eval $call
 done

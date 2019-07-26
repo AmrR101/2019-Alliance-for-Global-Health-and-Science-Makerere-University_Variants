@@ -2,6 +2,8 @@
 
 This document assumes [project_setup](./project_setup.md) has been completed.
 
+<img src="preproc_figures/wkflow_1.png" alt="workflow flowchart" width="600px"/>
+
 ## Why preprocess reads
 
 We have found that aggressively “cleaning” and processing reads can make a large difference to the speed and quality of mapping and assembly results. Cleaning your reads means, removing reads/bases that are:
@@ -373,11 +375,11 @@ Note the patterns:
 
 ---
 
-**5\.** We can now run the preprocessing routine across all samples on the real data using a SLURM script, [hts_preproc_Variants.slurm](../scripts/hts_preproc_Variants.sh), that we should take a look at now.
+**5\.** We can now run the preprocessing routine across all samples on the real data using a shell script, [hts_preproc_wks_Variants.sh](../scripts/hts_preproc_wks_Variants.sh), that we should take a look at now.
 
     cd ~/variant_example  # We'll run this from the main directory
-    wget https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Alliance-for-Global-Health-and-Science-Makerere-University_Variants/master/scripts/hts_preproc_Variants.sh
-    less hts_preproc_Variants.sh
+    wget https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Alliance-for-Global-Health-and-Science-Makerere-University_Variants/master/scripts/hts_preproc_wks_Variants.sh
+    less hts_preproc_wks_Variants.sh
 
  When you are done, type "q" to exit.
 
@@ -416,7 +418,7 @@ echo $runtime
 
 After looking at the script, let's run it.
 
-    bash hts_preproc_Variants.slurm  # moment of truth!
+    bash hts_preproc_wks_Variants.sh > scriptout/htstream.out 2> scriptout/htstream.err # moment of truth!
 
 ---
 
@@ -487,8 +489,8 @@ I've created a small R script to read in each json file, pull out some relevant 
     cd ~/variant_example  # We'll run this from the main directory
     wget https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Alliance-for-Global-Health-and-Science-Makerere-University_Variants/master/scripts/summarize_stats_Variants.R
 
-    R CMD BATCH summarize_stats_Variants.R
-    cat summary_hts.txt
+    R CMD BATCH hts_preproc_stats_wks_Variants.R
+    cat hts_preproc_stats.txt
 
 Open in excel (or excel like application), you may have to move the header column 1 cell to the right, and lets review.
 
@@ -500,8 +502,8 @@ Open in excel (or excel like application), you may have to move the header colum
 
 shell script for preprocessing using bash loop and htstream.
 
-[hts_preproc.sh](../scripts/hts_preproc_Variants.sh)
+[hts_preproc_wks_Variants.sh](../scripts/hts_preproc_wks_Variants.sh)
 
 R script to produce summary table, assumes exact htstream operations and order as described above.
 
-[summary_stats.R](../scripts/summarize_stats_Variants.R)
+[hts_preproc_stats_wks_Variants.R](../scripts/hts_preproc_stats_wks_Variants.R)

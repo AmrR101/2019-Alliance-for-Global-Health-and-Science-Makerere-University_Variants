@@ -19,6 +19,8 @@ __The mission of the Bioinformatics Core facility is to facilitate outstanding o
 
 ## Workshop Goals
 
+<img src="base_figures/wkflow_0.png" alt="workflow flowchart" width="600px"/>
+
 * End to End understanding of Variant Analysis
   * Discussions/lectures
   * Technologies
