@@ -8,6 +8,7 @@ title: July 2019 Variant Analysis Workshop (Makerere University, Kampala, Uganda
 
 [What is Bioinformatics](pdfs/Genomics_a_perspective_March2019.pdf)
 
+[Software used in the workshop](software.md)
 
 ## Introductory Command line and cluster
 * [Intro to command-line](cli/command-line-intro.md)
@@ -30,8 +31,6 @@ title: July 2019 Variant Analysis Workshop (Makerere University, Kampala, Uganda
 
 
 ## Analysis
-
-
 
 [Closing thoughts](closing.md)
 

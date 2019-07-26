@@ -6,21 +6,29 @@
 2. [RStudio](https://www.rstudio.com/products/rstudio/download/#download)  
   Install from the website
 
-2b. R packages
+3. **R packages**
   * tidyr,  install.packages("tidyr", repos='http://cran.us.r-project.org')
   * json,  install.packages("json", repos='http://cran.us.r-project.org')
 
-3. [Anaconda3](https://www.anaconda.com/distribution/#download-section)  
+
+4. [Anaconda3](https://www.anaconda.com/distribution/#download-section)  
   Install from website
 
-4. [htstream](https://ibest.github.io/HTStream/)  
+
+5. [htstream](https://ibest.github.io/HTStream/)  
   follow instructions [here](https://ibest.github.io/HTStream/#Installation)
 
-5. [bwa](https://bioconda.github.io/recipes/bwa/README.html)  
-  conda install bwa
 
-6. [freebayes](https://anaconda.org/bioconda/freebayes)  
-  conda install -c bioconda freebayes
+6. [bwa](https://bioconda.github.io/recipes/bwa/README.html)  
 
-7. [snpeff](https://anaconda.org/bioconda/snpeff)  
-  conda install -c bioconda snpeff
+    conda install bwa
+
+
+7. [freebayes](https://anaconda.org/bioconda/freebayes)  
+
+    conda install -c bioconda freebayes
+
+
+8. [snpeff](https://anaconda.org/bioconda/snpeff)
+
+    conda install -c bioconda snpeff
