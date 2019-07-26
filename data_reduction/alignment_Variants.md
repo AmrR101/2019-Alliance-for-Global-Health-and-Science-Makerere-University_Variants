@@ -149,8 +149,10 @@ We need to first get the url for the annotation gff.
 1. Uncompresses them using gunzip.
 1. Creates the bwa index
 
-  cd ~/variant_example
-  bash bwa_index_wks_Variants.sh > scriptout/bwa_index.out 2> scriptout/bwa_index.err
+
+    cd ~/variant_example
+    bash bwa_index_wks_Variants.sh > scriptout/bwa_index.out 2> scriptout/bwa_index.err
+
 
 This step will take a seconds.
 
@@ -160,18 +162,20 @@ This step will take a seconds.
 
 **1\.** We are now ready to try an alignment. Let's create an output directory for BWA:
 
+
     cd ~/variant_example/HTS_testing
+
 
 and let's run bwa on the pair of hstream streamed test files we created earlier.
 
 Then run the bwa command (Its on multiple lines for readability)
 
-  bwa mem \
-  -t 2 \
-  -R '@RG\tID:sample1.streamed\tSM:sample1.streamed\tPL:ILLUMINA\tDS:Paired' \
-  ../Reference/GCF_000789395.1_ASM78939v1_genomic.fna  \
-  sample1.streamed_R1.fastq.gz sample1.streamed_R2.fastq.gz | \
-  samtools sort -m 768M --threads 2 -o sample1.streamed_bwa.bam -
+    bwa mem \
+    -t 2 \
+    -R '@RG\tID:sample1.streamed\tSM:sample1.streamed\tPL:ILLUMINA\tDS:Paired' \
+    ../Reference/GCF_000789395.1_ASM78939v1_genomic.fna  \
+    sample1.streamed_R1.fastq.gz sample1.streamed_R2.fastq.gz | \
+    samtools sort -m 768M --threads 2 -o sample1.streamed_bwa.bam -
 
 
 In the command, we are telling bwa to map reads to the genome using 2 threads, and providing a RG tag (see [filetype.md](./filetypes.md)), __piping__ to samtools sort (max mem 768M and threads 2), the name for the output file will be sample1.streamed_bwa.bam.
@@ -265,11 +269,11 @@ echo $runtime
 Because in preprocessing we overlapped reads, we have both single-end and paired-end reads. We need to process these separately and then merge (using samtools merge) the results. In addition to mapping and merging, we will also use samtools to index, idxstats, flagstats and stats. Take a quick look at the help documentation for these apps.
 
 
-  samtools merge
-  samtools index
-  samtools idxstats
-  samtools flagstats
-  samtools stats
+    samtools merge  
+    samtools index  
+    samtools idxstats  
+    samtools flagstats  
+    samtools stats  
 
 
 After looking at the script, lets run it.
@@ -296,8 +300,8 @@ Are all samples behaving similarly? Discuss ...
 Once we are satisfied the data look good, lets remove the pre-merged bam files that at in pe and se.
 
 
-  cd ~/variant_example  # We'll run this from the main directory
-  rm -rf 02-BWA/*/*-pe 02-BWA/*/*-se
+    cd ~/variant_example  # We'll run this from the main directory
+    rm -rf 02-BWA/*/*-pe 02-BWA/*/*-se
 
 
 ## Scripts
