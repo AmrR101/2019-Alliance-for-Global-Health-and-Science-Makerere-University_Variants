@@ -98,6 +98,7 @@ There should be 15 files. Now, run the script using sbatch:
 
 
     bcftools stats 03-Freebayes/freebayes.vcf > freebayes_stats.txt
+
 ## Scripts
 
 shell script for running freebayes
