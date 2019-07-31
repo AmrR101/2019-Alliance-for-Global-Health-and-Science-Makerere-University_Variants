@@ -18,13 +18,7 @@ call="freebayes \
   --bam-list ${BAMLIST} \
   --fasta-reference ${mapfasta} \
   --vcf  ${outfile} \
-  --ploidy 1 \
-  --use-best-n-alleles 6 \
-  --max-complex-gap 75 \
-  --min-mapping-quality 30 \
-  --min-base-quality 20 \
-  --min-supporting-allele-qsum 0 \
-  --genotype-variant-threshold 0"
+  --ploidy 1"
 
 echo $call
 eval $call

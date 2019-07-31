@@ -29,6 +29,10 @@
     conda install -c bioconda freebayes
 
 
-8. [snpeff](https://anaconda.org/bioconda/snpeff)
+8. [bcftools](https://samtools.github.io/bcftools/bcftools.html)
+    conda install -c bioconda bcftools
+
+
+9. [snpeff](https://anaconda.org/bioconda/snpeff)
 
     conda install -c bioconda snpeff
