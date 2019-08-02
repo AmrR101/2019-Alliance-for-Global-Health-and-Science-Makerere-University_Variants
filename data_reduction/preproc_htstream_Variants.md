@@ -490,7 +490,7 @@ Lets grep for the sequence and count occurrences
 I've created a small R script to read in each json file, pull out some relevant stats and write out a table for all samples.
 
     cd ~/variant_example  # We'll run this from the main directory
-    curl https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Alliance-for-Global-Health-and-Science-Makerere-University_Variants/master/scripts/summarize_stats_Variants.R > summarize_stats_Variants.R
+    curl https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Alliance-for-Global-Health-and-Science-Makerere-University_Variants/master/scripts/hts_preproc_stats_wks_Variants.R > hts_preproc_stats_wks_Variants.R
 
     R CMD BATCH hts_preproc_stats_wks_Variants.R
     cat hts_preproc_stats.txt
