@@ -110,8 +110,8 @@ We need to first get the url for the annotation gff.
 **3\.** We are going to use an aligner called ['BWA MEM'](https://github.com/lh3/bwa) to align the sequence reads, but first we need to index the genome for BWA. Lets pull down a shell script to index the genome.
 
     cd ~/variant_example
-      curl https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Alliance-for-Global-Health-and-Science-Makerere-University_Variants/master/scripts/bwa_index_wks_Variants.sh > bwa_index_wks_Variants.sh
-      less bwa_index_wks_Variants.sh
+    curl https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Alliance-for-Global-Health-and-Science-Makerere-University_Variants/master/scripts/bwa_index_wks_Variants.sh > bwa_index_wks_Variants.sh
+    less bwa_index_wks_Variants.sh
 
  When you are done, type "q" to exit.
 
