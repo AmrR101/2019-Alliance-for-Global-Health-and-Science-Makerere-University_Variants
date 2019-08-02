@@ -9,11 +9,11 @@ outpath="Reference"
 [[ -d ${outpath} ]] || mkdir ${outpath}
 
 cd ${outpath}
-wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/789/395/GCF_000789395.1_ASM78939v1/GCF_000789395.1_ASM78939v1_genomic.fna.gz
+curl ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/789/395/GCF_000789395.1_ASM78939v1/GCF_000789395.1_ASM78939v1_genomic.fna.gz > GCF_000789395.1_ASM78939v1_genomic.fna.gz
 gunzip GCF_000789395.1_ASM78939v1_genomic.fna.gz
 FASTA="GCF_000789395.1_ASM78939v1_genomic.fna"
 
-wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/789/395/GCF_000789395.1_ASM78939v1/GCF_000789395.1_ASM78939v1_genomic.gff.gz
+curl ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/789/395/GCF_000789395.1_ASM78939v1/GCF_000789395.1_ASM78939v1_genomic.gff.gz > GCF_000789395.1_ASM78939v1_genomic.gff.gz
 gunzip GCF_000789395.1_ASM78939v1_genomic.gff.gz
 GFF="GCF_000789395.1_ASM78939v1_genomic.gff"
 
