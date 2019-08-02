@@ -378,7 +378,7 @@ Note the patterns:
 **5\.** We can now run the preprocessing routine across all samples on the real data using a shell script, [hts_preproc_wks_Variants.sh](../scripts/hts_preproc_wks_Variants.sh), that we should take a look at now.
 
     cd ~/variant_example  # We'll run this from the main directory
-    wget https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Alliance-for-Global-Health-and-Science-Makerere-University_Variants/master/scripts/hts_preproc_wks_Variants.sh
+    curl https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Alliance-for-Global-Health-and-Science-Makerere-University_Variants/master/scripts/hts_preproc_wks_Variants.sh > hts_preproc_wks_Variants.sh
     less hts_preproc_wks_Variants.sh
 
  When you are done, type "q" to exit.

@@ -110,7 +110,7 @@ We need to first get the url for the annotation gff.
 **3\.** We are going to use an aligner called ['BWA MEM'](https://github.com/lh3/bwa) to align the sequence reads, but first we need to index the genome for BWA. Lets pull down a shell script to index the genome.
 
   cd ~/variant_example
-  wget https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Alliance-for-Global-Health-and-Science-Makerere-University_Variants/master/scripts/bwa_index_wks_Variants.sh
+  curl https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Alliance-for-Global-Health-and-Science-Makerere-University_Variants/master/scripts/bwa_index_wks_Variants.sh > bwa_index_wks_Variants.sh
   less bwa_index_wks_Variants.sh
 
  When you are done, type "q" to exit.
@@ -127,11 +127,11 @@ We need to first get the url for the annotation gff.
  [[ -d ${outpath} ]] || mkdir ${outpath}
 
  cd ${outpath}
- wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/789/395/GCF_000789395.1_ASM78939v1/GCF_000789395.1_ASM78939v1_genomic.fna.gz
+ curl ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/789/395/GCF_000789395.1_ASM78939v1/GCF_000789395.1_ASM78939v1_genomic.fna.gz > GCF_000789395.1_ASM78939v1_genomic.fna.gz
  gunzip GCF_000789395.1_ASM78939v1_genomic.fna.gz
  FASTA="GCF_000789395.1_ASM78939v1_genomic.fna"
 
- wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/789/395/GCF_000789395.1_ASM78939v1/GCF_000789395.1_ASM78939v1_genomic.gff.gz
+ curl ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/789/395/GCF_000789395.1_ASM78939v1/GCF_000789395.1_ASM78939v1_genomic.gff.gz > GCF_000789395.1_ASM78939v1_genomic.gff.gz
  gunzip GCF_000789395.1_ASM78939v1_genomic.gff.gz
  GFF="GCF_000789395.1_ASM78939v1_genomic.gff"
 
@@ -145,7 +145,7 @@ We need to first get the url for the annotation gff.
  echo $runtime
  ```
 
-1. The script uses wget to download the fasta and GFF files from NCBI using the links you found earlier.
+1. The script uses curl to download the fasta and GFF files from NCBI using the links you found earlier.
 1. Uncompresses them using gunzip.
 1. Creates the bwa index
 
@@ -185,7 +185,7 @@ In the command, we are telling bwa to map reads to the genome using 2 threads, a
 **1\.** We can now run BWA across all samples on the real data using a shell script, [bwa_wks_Variants.sh](../scripts/bwa_wks_Variants.sh), that we should take a look at now.
 
     cd ~/variant_example  # We'll run this from the main directory
-    wget https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Alliance-for-Global-Health-and-Science-Makerere-University_Variants/master/scripts/bwa_wks_Variants.sh
+    curl https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Alliance-for-Global-Health-and-Science-Makerere-University_Variants/master/scripts/bwa_wks_Variants.sh > bwa_wks_Variants.sh
     less bwa_wks_Variants.sh
 
 When you are done, type "q" to exit.
@@ -287,7 +287,7 @@ Takes about 15 minutes to run all samples.
 **1\.** Once your jobs have finished successfully (check the error and out logs like we did in the previous exercise), use a script of ours, [star_stats.sh](../scripts/star_stats.sh) to collect the alignment stats. Don't worry about the script's contents at the moment. For now:
 
     cd ~/variant_example  # We'll run this from the main directory
-    wget https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Alliance-for-Global-Health-and-Science-Makerere-University_Variants/master/scripts/bwa_stats_wks_Variants.R
+    curl https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Alliance-for-Global-Health-and-Science-Makerere-University_Variants/master/scripts/bwa_stats_wks_Variants.R > bwa_stats_wks_Variants.R
 
     R CMD BATCH bwa_stats_wks_Variants.R
     cat bwa_stats.txt
