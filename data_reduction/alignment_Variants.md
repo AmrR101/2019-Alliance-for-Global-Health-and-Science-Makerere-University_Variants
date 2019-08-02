@@ -150,7 +150,7 @@ We need to first get the url for the annotation gff.
 1. Creates the bwa index
 
     cd ~/variant_example
-    bash bwa_index_wks_Variants.sh > scriptout/bwa_index.out 2> scriptout/bwa_index.err
+    bash bwa_index_wks_Variants.sh > scriptout./bwa_index.out 2> script_out/bwa_index.err
 
 
 This step will take a seconds.
