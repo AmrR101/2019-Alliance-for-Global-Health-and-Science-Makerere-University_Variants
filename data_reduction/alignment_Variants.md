@@ -220,7 +220,7 @@ do
 
     echo "SAMPLE: ${sample}"
 
-    output=${outpath}/${sample}/${sample}-_bwa.bam
+    output=${outpath}/${sample}/${sample}_bwa.bam
 
     call="bwa mem -t ${MAPTHREADS} \
       -R '@RG\tID:${sample}\tSM:${sample}\tPL:ILLUMINA\tDS:Paired' \
@@ -283,7 +283,7 @@ Takes about 15 minutes to run all samples.
 
 ## Quality Assurance - Mapping statistics as QA/QC.
 
-**1\.** Once your jobs have finished successfully (check the error and out logs like we did in the previous exercise), use a script of ours, [star_stats.sh](../scripts/star_stats.sh) to collect the alignment stats. Don't worry about the script's contents at the moment. For now:
+**1\.** Once your jobs have finished successfully (check the error and out logs like we did in the previous exercise), use a script of ours, [bwa_stats_wks_Variants.R](../scripts/bwa_stats_wks_Variants.R) to collect the alignment stats. Don't worry about the script's contents at the moment. For now:
 
     cd ~/variant_example  # We'll run this from the main directory
     curl https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Alliance-for-Global-Health-and-Science-Makerere-University_Variants/master/scripts/bwa_stats_wks_Variants.R > bwa_stats_wks_Variants.R
