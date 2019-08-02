@@ -11,7 +11,9 @@ Let's set up a project directory for the workshop, and talk a bit about project 
 **2a\.** Next, go into that directory, create a raw data directory (we are going to call this 00-RawData) and cd into that directory. Lets copy the workshop data into this folder.
 
     cd ~/variant_example
-    mkdir 00-RawData
+
+Now copy over the data in 00-RawData from the flash drive.
+
     cd 00-RawData/
 
 This directory now contains a folder for each sample and the fastq files for each sample are in the sample folders.
@@ -64,7 +66,7 @@ See if you can figure out how this command works.
 
 ---
 
-**5\.** Now go back to your 'rnaseq_example' directory and create two directories called 'scriptout' and '01-HTS_Preproc':
+**5\.** Now go back to your 'variant_example' directory and create two directories called 'scriptout' and '01-HTS_Preproc':
 
     cd ~/variant_example
     mkdir scriptout

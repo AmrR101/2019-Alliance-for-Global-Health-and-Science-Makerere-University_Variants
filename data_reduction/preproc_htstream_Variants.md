@@ -351,7 +351,7 @@ hts_QWindowTrim trim 5' and/or 3' end of the sequence using a windowing (average
     hts_Stats -L sample1_htsStats.log -1 sample1.subset_R1.fastq.gz -2 sample1.subset_R2.fastq.gz | \
     hts_SeqScreener -A -L sample1_htsStats.log | \
     hts_SuperDeduper -e 1000 -A -L sample1_htsStats.log | \
-    hts_AdapterTrimmer -n -A -L sample1_htsStats.log | \
+    hts_Overlapper -n -A -L sample1_htsStats.log | \
     hts_QWindowTrim -n -A -L sample1_htsStats.log | \
     hts_NTrimmer -n -A -L sample1_htsStats.log | \
     hts_CutTrim -n -m 150 -A -L sample1_htsStats.log | \
@@ -449,6 +449,7 @@ Also, check the output files. First check the number of forward and reverse outp
     cd 01-HTS_Preproc
     ls */*R1* | wc -l
     ls */*R2* | wc -l
+    ls */*SE* | wc -l
 
 Check the sizes of the files as well. Make sure there are no zero or near-zero size files and also make sure that the size of the files are in the same ballpark as each other:
 
@@ -470,6 +471,7 @@ Let's search for the adapter sequence. Type '/' (a forward slash), and then type
 Now look at the output file:
 
     zless 01-HTS_Preproc/sample1/sample1_R1.fastq.gz
+    zless 01-HTS_Preproc/sample1/sample1_SE.fastq.gz
 
 If you scroll through the data (using the spacebar), you will see that some of the sequences have been trimmed. Now, try searching for **AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC** again. You shouldn't find it (adapters were trimmed remember), but rarely is anything perfect. You may need to use Control-C to get out of the search and then "q" to exit the 'less' screen.
 
@@ -477,6 +479,7 @@ Lets grep for the sequence and count occurrences
 
     gunzip -c  00-RawData/sample1/sample1_R1.fastq.gz | grep  AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC | wc -l
     gunzip -c  01-HTS_Preproc/sample1/sample1_R1.fastq.gz | grep  AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC | wc -l
+    gunzip -c  01-HTS_Preproc/sample1/sample1_SE.fastq.gz | grep  AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC | wc -l
 
 *What is the reduction in adapters found?*
 
@@ -487,7 +490,7 @@ Lets grep for the sequence and count occurrences
 I've created a small R script to read in each json file, pull out some relevant stats and write out a table for all samples.
 
     cd ~/variant_example  # We'll run this from the main directory
-    wget https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Alliance-for-Global-Health-and-Science-Makerere-University_Variants/master/scripts/summarize_stats_Variants.R
+    curl https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Alliance-for-Global-Health-and-Science-Makerere-University_Variants/master/scripts/summarize_stats_Variants.R > summarize_stats_Variants.R
 
     R CMD BATCH hts_preproc_stats_wks_Variants.R
     cat hts_preproc_stats.txt
