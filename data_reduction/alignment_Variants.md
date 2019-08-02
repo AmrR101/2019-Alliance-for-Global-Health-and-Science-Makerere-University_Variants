@@ -147,10 +147,10 @@ We need to first get the url for the annotation gff.
 
 1. The script uses curl to download the fasta and GFF files from NCBI using the links you found earlier.
 1. Uncompresses them using gunzip.
-1. Creates the bwa index
+1. Creates the bwa index  
 
-    cd ~/variant_example
-    bash bwa_index_wks_Variants.sh > scriptout./bwa_index.out 2> script_out/bwa_index.err
+    cd ~/variant_example  
+    bash bwa_index_wks_Variants.sh > scriptout./bwa_index.out 2> script_out/bwa_index.err  
 
 
 This step will take a seconds.
