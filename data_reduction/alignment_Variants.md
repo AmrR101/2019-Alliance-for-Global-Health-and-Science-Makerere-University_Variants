@@ -152,6 +152,7 @@ We need to first get the url for the annotation gff.
     cd ~/variant_example
     bash bwa_index_wks_Variants.sh > scriptout/bwa_index.out 2> scriptout/bwa_index.err
 
+
 This step will take a seconds.
 
 **IF** for some reason it didn't finish, is corrupted, or you missed the session, you can copy over from the flash drive.
