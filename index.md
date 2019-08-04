@@ -31,6 +31,7 @@ With the Center for Emerging and Neglected Diseases ([CEND](http://cend.globalhe
 * [Alignment](data_reduction/alignment_Variants.md)
 
 ## Variant Calling
+* [Variant Calling  with Freebayes](variant_analysis/variant_calling.md)
 
 
 ## Analysis

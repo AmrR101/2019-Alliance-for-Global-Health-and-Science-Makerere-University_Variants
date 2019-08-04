@@ -6,6 +6,14 @@ This document assumes [alignment](../data_reduction/alignment_Variants.md) has b
 
 <img src="variant_analysis_figures/wkflow_3.png" alt="workflow flowchart" width="600px"/>
 
+<img src="variant_analysis_figures/nrg2958-f1.jpg" alt="Variant types" width="600px"/>
+Can Alkan, Bradley P. Coe & Evan E. Eichler. "Genome structural variation discovery and genotyping" Nature Reviews Genetics volume 12, pages 363–376 (2011)
+
+### Haplotype Calling
+
+<img src="https://raw.githubusercontent.com/ekg/freebayes/v1.3.0/paper/haplotype_calling.png" alt="haplotype calling" width="600px"/>
+
+
 ## Variant Calling using Freebayes
 
 We will call short variants (SNPs and indels) using [freebayes](https://github.com/ekg/freebayes). We will use the output from the prior alignment step as input into the freebayes. freebayes produces a VCF (Variant Call Format) file with genotype information for every variant across all the samples within an experiment.
@@ -19,13 +27,15 @@ We will call short variants (SNPs and indels) using [freebayes](https://github.c
 
     freebayes -h | less
 
-Freebayes has many options, but we are going to run with the defaults. The help text is long so I'm not going to paste it here but rather we pipe to `less` to read it.
+Freebayes has many options, and the help text is long so I'm not going to paste it here but rather we pipe to `less` to read it.
 
 
-    cd ~/variant_example  # We'll run this from the main directory
-    wget https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Alliance-for-Global-Health-and-Science-Makerere-University_Variants/master/scripts/freebayes_wks_Variant.sh
+    cd ~/variant_example
+    curl https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Alliance-for-Global-Health-and-Science-Makerere-University_Variants/master/scripts/freebayes_wks_Variant.sh > freebayes_wks_Variant.sh
 
     cat freebayes_wks_Variant.sh  
+
+We are going to run freebayes mostly with the defaults. What non-default parameter do we use and why?
 
 ```bash
 #!/bin/bash
@@ -70,34 +80,19 @@ Check the file and make sure it looks right:
     cat bamlist.txt
 
 
-There should be 15 files. Now, run the script using sbatch:
+There should be 15 bam files in bamlist.txt. Now, run the script:
 
 
     bash freebayes_wks_Variants.sh > scriptout/freebayes.out 2> scriptout/freebayes.err
 
-    ## Quality Assurance - Mapping statistics as QA/QC.
 
-    **1\.** Once your jobs have finished successfully (check the error and out logs like we did in the previous exercise), use a script of ours, [star_stats.sh](../scripts/star_stats.sh) to collect the alignment stats. Don't worry about the script's contents at the moment. For now:
+## Quality Assurance - bcftools stats.
 
-        cd ~/variant_example  # We'll run this from the main directory
-        wget https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Alliance-for-Global-Health-and-Science-Makerere-University_Variants/master/scripts/bwa_stats_wks_Variants.R
-
-        R CMD BATCH bwa_stats_wks_Variants.R
-        cat bwa_stats.txt
-
-    Open in excel (or excel like application), you may have to move the header column 1 cell to the right, and lets review.
-
-    Are all samples behaving similarly? Discuss ...
-
-
-    Once we are satisfied the data look good, lets remove the pre-merged bam files that at in pe and se.
-
+**1\.** Once the job have finished successfully (check the error and out logs like we did in the previous exercise), then we will run *bcltools stats* to collect the variant calling stats:
 
     cd ~/variant_example  # We'll run this from the main directory
-    rm -rf 02-BWA/*/*-pe 02-BWA/*/*-se
-
-
     bcftools stats 03-Freebayes/freebayes.vcf > freebayes_stats.txt
+    less freebayes_stats.txt
 
 ## Scripts
 
