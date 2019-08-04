@@ -2,11 +2,14 @@
 title: July 2019 Variant Analysis Workshop (Makerere University, Kampala, Uganda) Home
 ---
 
+With the Center for Emerging and Neglected Diseases ([CEND](http://cend.globalhealth.berkeley.edu)), UC Berkeley
+
+
 #### UC Davis Genome Center [*Bioinformatics Core*](http://bioinformatics.ucdavis.edu/)
 
 [Welcome](welcome.md)
 
-[What is Bioinformatics](pdfs/Genomics_a_perspective_March2019.pdf)
+[Genomics A Perspective](pdfs/Genomics_a_perspective_AllianceTalk2019.pdf)
 
 [Software used in the workshop](software.md)
 
