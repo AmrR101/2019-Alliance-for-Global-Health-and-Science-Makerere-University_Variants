@@ -6,6 +6,13 @@ This document assumes [alignment](../data_reduction/alignment_Variants.md) has b
 
 <img src="variant_analysis_figures/wkflow_3.png" alt="workflow flowchart" width="600px"/>
 
+Considerations:
+
+* The quality of the basepair
+* The position of the basepair in the read
+* The strand of the read
+* The mapping quality
+
 ### Haplotype Calling
 
 Generally speaking there are two popular simple variant (SNPs/INDELs) callers, [GATK](https://software.broadinstitute.org/gatk/) and [Freebayes](https://github.com/ekg/freebayes). Both are now haplotype callers, in the sense that it calls variants based on the literal sequences of reads aligned to the reference region, not their precise alignment (CIGAR alignment). Hapoltype calling avoids one of the core problems with alignment-based variant detection --- that identical sequences may have multiple possible alignments:
@@ -94,6 +101,7 @@ There should be 15 bam files in bamlist.txt. Now, run the script:
     cd ~/variant_example  # We'll run this from the main directory
     bcftools stats 03-Freebayes/freebayes.vcf > freebayes_stats.txt
     less freebayes_stats.txt
+    plot-vcfstats -p vcfstats freebayes_stats.txt
 
 ## Scripts
 
