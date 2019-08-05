@@ -50,7 +50,8 @@ Freebayes has many options, and the help text is long so I'm not going to paste 
 
 
     cd ~/variant_example
-    curl https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Alliance-for-Global-Health-and-Science-Makerere-University_Variants/master/scripts/freebayes_wks_Variant.sh > freebayes_wks_Variant.sh
+
+    curl https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2019-Alliance-for-Global-Health-and-Science-Makerere-University_Variants/master/scripts/freebayes_wks_Variants.sh > freebayes_wks_Variants.sh
 
     cat freebayes_wks_Variant.sh  
 
