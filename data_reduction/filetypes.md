@@ -343,4 +343,14 @@ See their detailed definitions below.
 * PQ - Phasing quality
 * PS - Phase set
 
-### Variant effect Prediction (ANN) field
+### Variant effect Prediction [ANN](http://snpeff.sourceforge.net/VCFannotationformat_v1.0.pdf) field
+
+* VCF INFO field name ANN, stands for ‘annotations’
+* Data fields are encoded separated by pipe sign "|"; the order of fields is written in the VCF
+header.
+* When comparing genomic coordinates, the comparison should be done first by chromosome
+names (compared alphabetically), then by start position, and finally by end position.
+* Special characters: Comma, space, tab, newline or pipe characters (‘,’, ‘ ‘, ‘\t’, ‘\n’, ‘|’, etc.) can be converted to underscore (‘\_’)  (This is the preferred way).
+* Multiple “effects / consequences” are separated by comma.
+
+See the current standard for a more thorough description.

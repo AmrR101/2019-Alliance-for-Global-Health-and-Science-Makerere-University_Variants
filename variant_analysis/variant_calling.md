@@ -1,4 +1,4 @@
-# Variant Calling
+# Variant Calling (SNPs/INDELs)
 
 This document assumes [alignment](../data_reduction/alignment_Variants.md) has been completed.
 
@@ -6,12 +6,13 @@ This document assumes [alignment](../data_reduction/alignment_Variants.md) has b
 
 <img src="variant_analysis_figures/wkflow_3.png" alt="workflow flowchart" width="600px"/>
 
-<img src="variant_analysis_figures/nrg2958-f1.jpg" alt="Variant types" width="600px"/>
-Can Alkan, Bradley P. Coe & Evan E. Eichler. "Genome structural variation discovery and genotyping" Nature Reviews Genetics volume 12, pages 363–376 (2011)
-
 ### Haplotype Calling
 
+Generally speaking there are two popular simple variant (SNPs/INDELs) callers, [GATK](https://software.broadinstitute.org/gatk/) and [Freebayes](https://github.com/ekg/freebayes). Both are now haplotype callers, in the sense that it calls variants based on the literal sequences of reads aligned to the reference region, not their precise alignment (CIGAR alignment). Hapoltype calling avoids one of the core problems with alignment-based variant detection --- that identical sequences may have multiple possible alignments:
+
 <img src="https://raw.githubusercontent.com/ekg/freebayes/v1.3.0/paper/haplotype_calling.png" alt="haplotype calling" width="600px"/>
+
+In this workshop we will use Freebayes, which uses short-read alignments for any number of individuals from a population and a reference genome (in FASTA format) to determine the most-likely combination of genotypes for the population at each position in the reference. It reports positions which it finds putatively polymorphic in variant call file (VCF) format.
 
 
 ## Variant Calling using Freebayes
@@ -23,7 +24,7 @@ We will call short variants (SNPs and indels) using [freebayes](https://github.c
 
     cd ~/variant_example
 
-**3\.** Now we will use software called 'freebayes' to find SNPs and short indels. Load the module and take a look at the help text:
+**2\.** Now we will use software called 'freebayes' to find SNPs and short indels, lets take a look at the help text:
 
     freebayes -h | less
 
