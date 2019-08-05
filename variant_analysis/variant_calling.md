@@ -22,6 +22,17 @@ Generally speaking there are two popular simple variant (SNPs/INDELs) callers, [
 In this workshop we will use Freebayes, which uses short-read alignments for any number of individuals from a population and a reference genome (in FASTA format) to determine the most-likely combination of genotypes for the population at each position in the reference. It reports positions which it finds putatively polymorphic in variant call file (VCF) format.
 
 
+The definition of a variant is based on the definition of each allele with respect to the reference sequence. We consider 5 major types loosely described as follows.
+
+1. SNP
+The reference and alternate sequences are of length 1 and the base nucleotide is different from one another.
+2. MNP
+The reference and alternate sequences are of the same length and have to be greater than 1 and all nucleotides in the sequences differ from one another.
+OR
+All reference and alternate sequences have the same length (this is applicable to all alleles).
+3. INDEL
+The reference and alternate sequences are not of the same length.
+
 ## Variant Calling using Freebayes
 
 We will call short variants (SNPs and indels) using [freebayes](https://github.com/ekg/freebayes). We will use the output from the prior alignment step as input into the freebayes. freebayes produces a VCF (Variant Call Format) file with genotype information for every variant across all the samples within an experiment.
