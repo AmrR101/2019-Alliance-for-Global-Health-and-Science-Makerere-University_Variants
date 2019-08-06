@@ -33,7 +33,7 @@ With the Center for Emerging and Neglected Diseases ([CEND](http://cend.globalhe
 ## Variant Calling
 * [Variant Calling with Freebayes](variant_analysis/variant_calling.md)
 * [Annotation with snpEff](variant_analysis/variant_annotation.md)
-
+* [Variant Manipulation in R](variant_analysis/Variants_manipulation_in_R.R)
 
 ## Analysis
 
